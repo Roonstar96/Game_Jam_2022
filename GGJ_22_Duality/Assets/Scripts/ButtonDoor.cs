@@ -18,8 +18,8 @@ public class ButtonDoor : MonoBehaviour
     private void Awake()
     {
         _doorObj.transform.position = _closePos.position;
-        _buttonsPressed = false;
     }
+
     private void Update()
     {
         ButtonCheck();
@@ -55,5 +55,4 @@ public class ButtonDoor : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
     }
-
 }
