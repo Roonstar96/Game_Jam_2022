@@ -29,7 +29,7 @@ public class ButtonDoor : MonoBehaviour
     {
         for (int i = 0; i < _buttons.Length; i++)
         {
-            var bb = _buttons[i].GetComponent<Button>().Pressed;
+            var bb = _buttons[i].GetComponent<ButtonGeneric>().Pressed;
 
             if (!bb)
             {
