@@ -8,15 +8,21 @@ public class MovementCrouch : MonoBehaviour
     [SerializeField] private float _direction;
     [SerializeField] private float _speed;
     [SerializeField] private bool _facingRight;
+    [SerializeField] private bool _isCrouching;
+    [SerializeField] private bool _isObstructed;
 
     [Header("Componenets")]
     [SerializeField] private Transform _trans;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private BoxCollider2D _box2D;
 
+    public bool Obstructed { get => _isObstructed; set => _isObstructed = value; }
+
     private void Awake()
     {
         _facingRight = true;
+        _isCrouching = false;
+        _isObstructed = false;
     }
 
     private void Update()
@@ -36,16 +42,26 @@ public class MovementCrouch : MonoBehaviour
     {
         if (Input.GetButtonDown("Crouch"))
         {
-            _trans.localScale = new Vector3 (1 , 0.5f, 1);
+            if (!_isCrouching && !_isObstructed)
+            {
+                _trans.localScale = new Vector3 (0.5f , 0.25f, 0.5f);
+                _isCrouching = true;  
+            }
+            else if (_isCrouching && !_isObstructed)
+            {
+                _trans.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                _isCrouching = false;
+            }
             //_box2D.size = new Vector2(1, 0.5f);
             //_box2D.offset = new Vector2(0, -0.25f);
         }
-        if (Input.GetButtonUp("Crouch"))
+
+        /*if (Input.GetButtonUp("Crouch") && !_isObstructed)
         {
-            _trans.localScale = new Vector3(1, 1, 1);
-            //_box2D.size = new Vector2(1, 1);
-            //_box2D.offset = new Vector2(0, 0);
-        }
+
+            _box2D.size = new Vector2(1, 1);
+            _box2D.offset = new Vector2(0, 0);
+        }*/
     }
 
     private void FlipPlayer() 

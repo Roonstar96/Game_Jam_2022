@@ -11,8 +11,8 @@ public class ButtonDoor : MonoBehaviour
     [SerializeField] private Transform _closePos;
 
     [Header("Button references")]
-    [SerializeField] private GameObject[] _buttons;
-    
+    [SerializeField] private ButtonGeneric[] _buttons;
+
     private float _timer;
 
     private void Awake()
@@ -29,7 +29,7 @@ public class ButtonDoor : MonoBehaviour
     {
         for (int i = 0; i < _buttons.Length; i++)
         {
-            var bb = _buttons[i].GetComponent<ButtonGeneric>().Pressed;
+            var bb = _buttons[i].Pressed;
 
             if (!bb)
             {
